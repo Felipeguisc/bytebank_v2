@@ -1,7 +1,10 @@
 import 'package:bytebank_v2/screens/contacts_list.dart';
+import 'package:bytebank_v2/screens/deposit/deposit_formulary.dart';
 import 'package:bytebank_v2/screens/transactions_list.dart';
 import 'package:bytebank_v2/screens/transfer.dart';
 import 'package:flutter/material.dart';
+
+import '../../widgets/balance.dart';
 
 const String _appBarLabel = 'Dashboard';
 const String _logoPath = 'images/bytebank_logo.png';
@@ -11,18 +14,24 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.lightGreen,
       appBar: AppBar(
         title: const Text(_appBarLabel),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(_logoPath),
+            child: Image.asset(
+              _logoPath,
+              height: size.height / 3,
+            ),
           ),
+          BalanceCard(),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -42,6 +51,18 @@ class Dashboard extends StatelessWidget {
                   Icons.people,
                   onTap: () => _showContactsList(context),
                 ),
+                _FeatureItem(
+                  'Depositar',
+                  Icons.add_circle_outlined,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return DepositFormulary();
+                      }),
+                    );
+                  },
+                )
               ],
             ),
           ),

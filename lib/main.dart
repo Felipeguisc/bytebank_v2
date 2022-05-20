@@ -1,8 +1,17 @@
-import 'package:bytebank_v2/screens/dashboard.dart';
+import 'package:bytebank_v2/screens/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'models/balance.dart';
 
 void main() {
-  runApp(BytebankApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => Balance(0)),
+
+    ],
+    child: BytebankApp(),
+  ),);
 }
 
 class BytebankApp extends StatelessWidget {
